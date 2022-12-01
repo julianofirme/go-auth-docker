@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jfirme-sys/go-auth-docker.git/database"
 	"github.com/jfirme-sys/go-auth-docker.git/models"
+	"github.com/jfirme-sys/go-auth-docker.git/util"
 )
 
 func CreateUser(c *gin.Context) {
@@ -19,6 +20,8 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
+	user.Password = util.SHA256Encoder(user.Password)
+
 	err = db.Create(&user).Error
 	if err != nil {
 		c.JSON(400, gin.H{
@@ -27,5 +30,5 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, user)
+	c.Status(204)
 }

@@ -5,6 +5,6 @@ import (
 	"gorm.io/gorm"
 )
 
-func RunMigrastions(db *gorm.DB) {
+func RunMigrations(db *gorm.DB) {
 	db.AutoMigrate(models.User{})
 }

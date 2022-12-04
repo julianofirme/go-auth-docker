@@ -13,18 +13,18 @@ type jwtService struct {
 }
 
 type Claim struct {
-	sum string `json:"sum"`
+	Sum uint `json:"sum"`
 	jwt.StandardClaims
 }
 
-func newJWTService() *jwtService {
+func NewJWTService() *jwtService {
 	return &jwtService{
 		secretKey: "secret-key",
 		issure:    "auth-api",
 	}
 }
 
-func (s *jwtService) GenerateToken(id string) (string, error) {
+func (s *jwtService) GenerateToken(id uint) (string, error) {
 	claim := &Claim{
 		id,
 		jwt.StandardClaims{
